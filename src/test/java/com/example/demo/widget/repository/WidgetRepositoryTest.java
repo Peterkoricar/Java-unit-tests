@@ -45,9 +45,10 @@ public class WidgetRepositoryTest {
     @DataSet("widgets.yml")
     void testFindByIdSuccess() {
         //  call findById method
-
+        Optional<Widget> widgets = repository.findById(1l);
         // use assertEquals on all Widget properties
-
+        Assertions.assertEquals("Widget 1", widgets.get().getName());
+        Assertions.assertEquals("This is widget 1", widgets.get().getDescription());
 
     }
 
@@ -55,7 +56,8 @@ public class WidgetRepositoryTest {
     @DataSet("widgets.yml")
     void testFindByIdNotFound() {
         // test findById for ID that is not present in widgets.yml dataset and assert that it is not found
-
+        Optional<Widget> widgets = repository.findById(3l);
+        Assertions.assertEquals(false, widgets.isPresent());
     }
 
     @Test
